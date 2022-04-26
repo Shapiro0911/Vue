@@ -11,11 +11,6 @@ export default new VueRouter({
             name: 'paymentList',
             component: () => import('../components/PaymentList.vue')
         },
-        ...addPayment,
-        {
-            path: '/calculator',
-            name: 'calculator',
-            component: () => import('../components/Calculator.vue')
-        },
+        ...addPayment
     ]
 })

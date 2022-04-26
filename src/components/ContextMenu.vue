@@ -82,7 +82,7 @@ export default {
   z-index: 3;
   border-radius: 3px;
   box-shadow: 0 0 5px 2px silver;
-  right: -2px;
+  right: 62px;
   top: 30px;
   background: white;
 }

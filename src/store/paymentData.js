@@ -5,6 +5,9 @@ const state = {
     limit: 3,
     currentPage: 1,
     isVisibleForm: false,
+    maxVisibleButtons: 3,
+    pages: [],
+    startPage: 1,
 }
 
 const mutations = {
@@ -33,6 +36,17 @@ const mutations = {
     setCurrentPage(state, page) {
         state.currentPage = page;
     },
+    setStartPage(state) {
+        if (state.currentPage === 1) {
+            state.startPage = 1;
+        }
+        else if (state.currentPage === state.totalPages) {
+            state.startPage = state.totalPages - state.maxVisibleButtons + 1;
+        }
+        else {
+            state.startPage = state.currentPage - 1;
+        }
+    }
 }
 
 const actions = {
@@ -45,7 +59,16 @@ const actions = {
                 if (state.paymentData.length == 0) { commit('setPaymentData', res) }
                 state.totalPages = Math.ceil(state.paymentData.length / state.limit);
                 state.currentList = state.paymentData.slice(from, to)
+                commit('setStartPage');
                 state.currentPage = page;
+                let pages = [];
+                for (let i = state.startPage; i <= Math.min(state.startPage + state.maxVisibleButtons - 1, state.totalPages); i++) {
+                    pages.push({
+                        name: i,
+                        isDisabled: i === state.currentPage
+                    });
+                }
+                state.pages = pages;
             })
     },
     addNewPayment({ dispatch }, data) {

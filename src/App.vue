@@ -1,26 +1,19 @@
 <template>
   <v-app>
-    <v-app-bar></v-app-bar>
-    <v-system-bar></v-system-bar>
     <v-main>
       <div id="app">
-        <Calculator v-if="0" />
         <PaymentList />
       </div>
     </v-main>
-    <v-bottom-navigation></v-bottom-navigation>
-    <v-footer></v-footer>
   </v-app>
 </template>
 
 <script>
-import Calculator from "./components/Calculator.vue";
 import PaymentList from "./components/PaymentList.vue";
 
 export default {
   name: "App",
   components: {
-    Calculator,
     PaymentList,
   },
 };

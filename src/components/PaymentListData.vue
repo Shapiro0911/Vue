@@ -23,11 +23,12 @@
     <div class="pagination">
       <v-btn @click="prevPage">←</v-btn>
       <v-btn
-        v-for="(page, index) in totalPages"
-        :key="page"
-        @click="choosePage(index + 1)"
+        v-for="page in pages"
+        :key="page.name"
+        :disabled="page.isDisabled"
+        @click="choosePage(page.name)"
       >
-        {{ index + 1 }}
+        {{ page.name }}
       </v-btn>
       <v-btn @click="nextPage">→</v-btn>
     </div>
@@ -80,6 +81,7 @@ export default {
       "totalPages",
       "currentList",
       "currentPage",
+      "pages",
     ]),
   },
   created() {
