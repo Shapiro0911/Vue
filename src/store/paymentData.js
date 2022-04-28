@@ -41,7 +41,10 @@ const mutations = {
             state.startPage = 1;
         }
         else if (state.currentPage === state.totalPages) {
-            state.startPage = state.totalPages - state.maxVisibleButtons + 1;
+            if (state.maxVisibleButtons < state.totalPages) {
+                state.startPage = state.totalPages - state.maxVisibleButtons + 1;
+            }
+            else state.startPage = 1;
         }
         else {
             state.startPage = state.currentPage - 1;
