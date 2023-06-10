@@ -56,23 +56,23 @@ const actions = {
     fetchData({ commit }, page) {
         let from = (page - 1) * state.limit;
         let to = from + state.limit;
-        fetch('https://shapiro911.github.io/DB/data/paymentData.json')
-            .then(response => response.json())
-            .then(res => {
-                if (state.paymentData.length == 0) { commit('setPaymentData', res) }
-                state.totalPages = Math.ceil(state.paymentData.length / state.limit);
-                state.currentList = state.paymentData.slice(from, to)
-                commit('setStartPage');
-                state.currentPage = page;
-                let pages = [];
-                for (let i = state.startPage; i <= Math.min(state.startPage + state.maxVisibleButtons - 1, state.totalPages); i++) {
-                    pages.push({
-                        name: i,
-                        isDisabled: i === state.currentPage
-                    });
-                }
-                state.pages = pages;
-            })
+        // fetch('https://github.com/Shapiro911/vuedb/paymentData.json')
+        // .then(response => response.json())
+        // .then(res => {
+        if (state.paymentData.length == 0) { commit('setPaymentData') }
+        state.totalPages = Math.ceil(state.paymentData.length / state.limit);
+        state.currentList = state.paymentData.slice(from, to)
+        commit('setStartPage');
+        state.currentPage = page;
+        let pages = [];
+        for (let i = state.startPage; i <= Math.min(state.startPage + state.maxVisibleButtons - 1, state.totalPages); i++) {
+            pages.push({
+                name: i,
+                isDisabled: i === state.currentPage
+            });
+        }
+        state.pages = pages;
+        // })
     },
     addNewPayment({ dispatch }, data) {
         state.paymentData.push(data);
